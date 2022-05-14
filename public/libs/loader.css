@@ -1,0 +1,40 @@
+.loader {
+    position: fixed;
+    width: 100%;
+    height: 2px;
+    background: blue;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    clip-path: inset(0px 100% 0px 0px);
+}
+
+.loader.active {
+    clip-path: inset(0px 80% 0px 0px);
+    animation: load 400ms ease-out;
+}
+
+.loader.finish {
+    clip-path: inset(0px 100% 0px 0px);
+    animation: finish 200ms ease-out;
+}
+
+@keyframes load {
+    0% {
+        clip-path: inset(0px 100% 0px 0px);
+    }
+
+    100% {
+        clip-path: inset(0px 80% 0px 0px);
+    }
+}
+
+@keyframes finish {
+    0% {
+        clip-path: inset(0px 80% 0px 0px);
+    }
+
+    100% {
+        clip-path: inset(0px 0% 0px 0px);
+    }
+}
