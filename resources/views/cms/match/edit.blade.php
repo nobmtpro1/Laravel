@@ -142,8 +142,9 @@
             error: function ( data, textStatus, jqXHR )
             {
                 var error = data.responseJSON.message
-                $( '#message' ).html( `<div class="alert alert-danger">${ error }</div>`)
-                window.scrollTo( 0, 0 );
+                alert(error)
+                // $( '#message' ).html( `<div class="alert alert-danger">${ error }</div>`)
+                // window.scrollTo( 0, 0 );
             },
         } );
         return false

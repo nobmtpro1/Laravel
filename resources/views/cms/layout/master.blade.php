@@ -2,34 +2,42 @@
 <html lang="en">
 
 <head>
+    <title>Admin Dashboard</title>
     <base href="{{asset('')}}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-
+    <meta name="description" content="{{now()}}">
+    <link rel="shortcut icon" href="cms-html/assets/images/logo/logo.svg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="cms-html/assets/css/bootstrap.css">
-
     <link rel="stylesheet" href="cms-html/assets/vendors/iconly/bold.css">
-
     <link rel="stylesheet" href="cms-html/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="cms-html/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="cms-html/assets/css/app.css">
     <link rel="stylesheet" href="libs/loader.css">
-    <link rel="shortcut icon" href="cms-html/logo.png" type="image/x-icon">
     <script src="cms-html/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="cms-html/assets/js/bootstrap.bundle.min.js"></script>
-
     <script src="cms-html/assets/vendors/simple-datatables/simple-datatables.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 
 <body>
     <div class="loader"></div>
+    <div class="loader2">
+        <div class="sk-chase">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+        </div>
+    </div>
 
     {{-- Start App --}}
     <div id="app">
@@ -65,15 +73,31 @@
         </div>
 
 
-
+        <script src="cms-html/assets/js/main.js"></script>
         <script>
-            $('#app').ready(function () {
-                let table1 = document.querySelector('#table1');
-                let dataTable = new simpleDatatables.DataTable(table1);
-            })
-        </script>
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
 
-        <script>
+            if (!$('.dataTable-input').lenght) {
+                    const table1 = document.querySelector('#table1');
+                    const dataTable = new simpleDatatables.DataTable(table1);
+                }
+
             $('#app').on('change','.imageInput',function () {
 			$( this ).next().attr( 'src', URL.createObjectURL( $( this )[ 0 ].files[ 0 ] ) )
             })
@@ -81,34 +105,35 @@
                     $( this ).parent().find( 'img' ).attr('src','')
                     $( this ).parent().find( '[type="hidden"]' ).val('')
             })
+
+            $('.loader2').removeClass('active')
+
+            console.log(123)
         </script>
 
-        <script>
-            $('.loader').removeClass('active')
-            $('.loader').addClass('finish')
-        </script>
+        @yield('js')
+    </div>
+    {{-- End App --}}
 
-        <script src="cms-html/assets/js/main.js"></script>
-
-        <script>
+    <script>
             var pjax = new Pjax({
                 elements: "a.pjax",
                 selectors: [
                     "title",
-                    "#app"
+                    'meta[name="description"]',
+                    "body"
                 ]
             })
-    
-        $('#app').on('click','a.pjax',function () {
-            $('.loader').removeClass('finish')
-            $('.loader').addClass('active')
-        })
-        </script>
 
-        @yield('js')
-
-    </div>
-    {{-- End App --}}
+            $('#app').on('click','a.pjax',function () {
+                $('.loader2').addClass('active')
+            })
+                
+            $(window).bind('popstate', function() {
+                window.location.href = window.location.href
+            });
+           
+    </script>
 
 </body>
 

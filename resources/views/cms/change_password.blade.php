@@ -68,14 +68,19 @@
             type: 'POST',
             success: function ( data )
             {
-               alert('Successfully')
                pjax.loadUrl(window.location.href)
+                
+               setTimeout(() => {
+                document.addEventListener("pjax:success",toastr.success('Successfully'))
+               }, 400);
+               
             },
             error: function ( data, textStatus, jqXHR )
             {
                 var error = data.responseJSON.message
-                $( '#message' ).html( `<div class="alert alert-danger">${ error }</div>`)
-                window.scrollTo( 0, 0 );
+                // $( '#message' ).html( `<div class="alert alert-danger">${ error }</div>`)
+                // window.scrollTo( 0, 0 );
+                toastr.error(error)
             },
         } );
         return false

@@ -137,6 +137,7 @@
                 var error = data.responseJSON.message
                 $( '#message' ).html( `<div class="alert alert-danger">${ error }</div>`)
                 window.scrollTo( 0, 0 );
+                // alert(error)
             },
         } );
         return false

@@ -2,9 +2,11 @@
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
-                <div class="logo" style="width:200px;height:auto">
+                <div class="logo" style="width:200px;height:auto; text-align:center">
                     <a class="pjax" href="{{route('cms.dashboard')}}" style="width:200px;height:auto"><img
-                            style="width:100px;height:auto" src="cms-html/logo.png" alt="Logo" srcset=""></a>
+                            style="width:100px;height:auto" src="cms-html/assets/images/logo/logo.svg" alt="Logo"
+                            srcset=""></a>
+
                 </div>
                 <div class="toggler">
                     <a class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -36,21 +38,17 @@
                     </a>
                 </li>
 
-                <li
-                    class="sidebar-item  has-sub ">
+                <li class="sidebar-item  has-sub ">
                     <a class='sidebar-link' style="cursor: pointer">
                         <i class="bi bi-stack"></i>
                         <span>Page content</span>
                     </a>
-                    <ul
-                        class="submenu">
-                        <li
-                            class="submenu-item">
+                    <ul class="submenu">
+                        <li class="submenu-item">
                             <a class="pjax" href="{{route('cms.match')}}">Home - Banner</a>
                         </li>
-                        <li
-                            class="submenu-item">
-                            <a class="pjax"  href="{{route('cms.bet')}}">Home - Trailer</a>
+                        <li class="submenu-item">
+                            <a class="pjax" href="{{route('cms.bet')}}">Home - Trailer</a>
                         </li>
                     </ul>
                 </li>
