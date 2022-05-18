@@ -49,11 +49,11 @@
         </div>
     </div>
 </section>
-<a href="" class="pjax" id="redirect"></a>
 @endsection
 @section('js')
 <script>
-    $('#app').on('submit','#form',function () {
+    const form = $('.card-body').html()
+    $(document).on('submit','#form',function () {
         var formData = new FormData()
         formData.append( '_token', $( '[name="_token"]' ).val() )
         formData.append( 'old_password', $( '[name="old_password"]' ).val() )
@@ -67,19 +67,13 @@
             contentType: false,
             type: 'POST',
             success: function ( data )
-            {
-               pjax.loadUrl(window.location.href)
-                
-               setTimeout(() => {
-                document.addEventListener("pjax:success",toastr.success('Successfully'))
-               }, 400);
-               
+            {                
+                $('.card-body').html(form)
+                toastr.success('Successfully')
             },
             error: function ( data, textStatus, jqXHR )
             {
                 var error = data.responseJSON.message
-                // $( '#message' ).html( `<div class="alert alert-danger">${ error }</div>`)
-                // window.scrollTo( 0, 0 );
                 toastr.error(error)
             },
         } );
